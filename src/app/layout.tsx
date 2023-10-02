@@ -1,6 +1,9 @@
-import './globals.css'
+import React from 'react'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,18 +12,12 @@ export const metadata: Metadata = {
   description: '',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className='bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 w-screen h-screen'>
         {children}
-        </div>
-        </body>
+      </body>
     </html>
   )
 }
