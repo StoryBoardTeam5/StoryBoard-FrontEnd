@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const TypingTest = () => {
   const [prompt, setPrompt] = useState('')
@@ -14,14 +14,13 @@ const TypingTest = () => {
   const [wpm, setWpm] = useState(0)
 
   /* Get the prompt of what we want the user to type here from MongoDB here */
-  const SetPrompt = () => {
-    const prompt = `The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.`
+  const GetPrompt = (prompt: string) => {
     setPrompt(prompt)
     setUntypedWords(prompt.split(' '))
     setCompletedWords([])
   }
 
-  /* Called at start and when Makes sure the input is always in focus */
+  /* Called at start to make sure the input is always in focus */
   const focusInput = () => {
     const input = document.getElementById('input')
     input?.focus()
@@ -30,21 +29,20 @@ const TypingTest = () => {
   const startGame = () => {
     setInputValue('')
     focusInput()
-    SetPrompt()
+    GetPrompt('This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt')
     setStarted(true)
     setCompleted(false)
     setStartTime(Date.now())
-    setInterval(calculateWPM, 1000)
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
     const lastLetter = inputValue[inputValue.length - 1]
     const currentWord = untypedWords[0]
-
+    //A Word has been typed
     if (lastLetter === ' ' || lastLetter === '.') {
+      // current word has been typed
       if (inputValue.includes(currentWord)) {
-        // current word has been typed
         const newWords = [...untypedWords.slice(1)]
         const newCompletedWords = [...completedWords, currentWord]
         setUntypedWords(newWords)
@@ -57,20 +55,24 @@ const TypingTest = () => {
     }
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      started && !completed && timer > 0 ? calculateWPM() : setCompleted(true)
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [started, completed, timeElapsed])
+
   const calculateWPM = () => {
     const now = Date.now()
-    const diff = (now - startTime) / 1000 / 60
-    console.log('Bowser', completedWords.length)
-    const wordsTyped = completedWords.length
-    const wpm = Math.ceil(wordsTyped / diff)
+    setTimeElapsed((now - startTime) / 1000)
+    const wpm = Math.ceil(completedWords.length / (timeElapsed / 60))
     setWpm(wpm)
-    setTimeElapsed(diff)
-    console.log('wpm', wpm)
   }
-  const timer = Math.ceil(60 - timeElapsed * 60)
+
+  const timer = Math.ceil(60 - timeElapsed)
 
   return (
-    <div id="body" className="flex h-screen content-center items-center justify-center bg-gray-900">
+    <div id="body" className="flex h-screen-with-nav content-center items-center justify-center bg-gray-900">
       <div id="Wrapper" className="aspect-video w-1/2 rounded-lg bg-gray-700 p-8 text-white" onClick={focusInput}>
         <input
           id="input"
@@ -98,35 +100,35 @@ const TypingTest = () => {
                   }
 
                   return (
-                    <>
-                      {' '}
-                      <span
-                        key={w_idx}
-                        className={`
+                    <div key = {w_idx  + 'word'} className='inline-block'>
+                      &nbsp;
+                    <span
+                      key={w_idx + 'anchor'}
+                      className={`
                                 ${highlight && 'text-green-600'} 
                                 ${currentWord && 'underline'}`}
-                      >
-                        {word.split('').map((letter, l_idx) => {
-                          const isCurrentWord = w_idx === completedWords.length
-                          const isWronglyTyped = letter !== inputValue[l_idx]
-                          const shouldBeHighlighted = l_idx < inputValue.length
-                          return (
-                            <span
-                              className={`letter ${
-                                isCurrentWord && shouldBeHighlighted
-                                  ? isWronglyTyped
-                                    ? 'text-red-600'
-                                    : 'text-green-600'
-                                  : ''
-                              }`}
-                              key={l_idx}
-                            >
-                              {letter}
-                            </span>
-                          )
-                        })}
-                      </span>
-                    </>
+                    >
+                      {word.split('').map((letter, l_idx) => {
+                        const isCurrentWord = w_idx === completedWords.length
+                        const isWronglyTyped = letter !== inputValue[l_idx]
+                        const shouldBeHighlighted = l_idx < inputValue.length
+                        return (
+                          <span
+                            className={`letter ${
+                              isCurrentWord && shouldBeHighlighted
+                                ? isWronglyTyped
+                                  ? 'text-red-600'
+                                  : 'text-green-600'
+                                : ''
+                            }`}
+                            key={l_idx}
+                          >
+                            {letter}
+                          </span>
+                        )
+                      })}
+                    </span>
+                    </div>
                   )
                 })}
           </div>
@@ -135,7 +137,6 @@ const TypingTest = () => {
               <li>
                 Timer:{' '}
                 <span id="time" className="ml-2 text-lg">
-                  {' '}
                   {timer > 0 ? timer : 0}
                 </span>
               </li>
