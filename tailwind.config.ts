@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       height: {
-        "screen-with-nav": "calc(100vh - 4rem)",
+        "screen-with-nav": "calc(100vh + 4rem)",
       },
       colors: {
       "background": "#252525",

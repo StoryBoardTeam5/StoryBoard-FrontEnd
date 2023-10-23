@@ -25,23 +25,26 @@ const TypingTest = () => {
     const input = document.getElementById('input')
     input?.focus()
   }
-
+  /* StartGame will prepare the input, set the prompt, and set the game to started */
   const startGame = () => {
     setInputValue('')
     focusInput()
-    GetPrompt('This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt')
+    GetPrompt(
+      'This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt',
+    )
     setStarted(true)
     setCompleted(false)
     setStartTime(Date.now())
   }
 
+  // Handle input
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
     const lastLetter = inputValue[inputValue.length - 1]
     const currentWord = untypedWords[0]
-    //A Word has been typed
+    //A Word has been typed if the last letter is a space or a period
     if (lastLetter === ' ' || lastLetter === '.') {
-      // current word has been typed
+      // current word has been typed correctly
       if (inputValue.includes(currentWord)) {
         const newWords = [...untypedWords.slice(1)]
         const newCompletedWords = [...completedWords, currentWord]
@@ -55,6 +58,7 @@ const TypingTest = () => {
     }
   }
 
+  // This useEffect will calculate the WPM every second
   useEffect(() => {
     const interval = setInterval(() => {
       started && !completed && timer > 0 ? calculateWPM() : setCompleted(true)
@@ -62,6 +66,7 @@ const TypingTest = () => {
     return () => clearInterval(interval)
   }, [started, completed, timeElapsed])
 
+  // WPM calculation that will be called every second
   const calculateWPM = () => {
     const now = Date.now()
     setTimeElapsed((now - startTime) / 1000)
@@ -72,8 +77,12 @@ const TypingTest = () => {
   const timer = Math.ceil(60 - timeElapsed)
 
   return (
-    <div id="body" className="flex h-screen-with-nav content-center items-center justify-center bg-gray-900">
-      <div id="Wrapper" className="aspect-video w-1/2 rounded-lg bg-gray-700 p-8 text-white" onClick={focusInput}>
+    <div id="body" className="flex h-screen content-center items-center justify-center bg-gray-900">
+      <div
+        id="Wrapper"
+        className="z-10 aspect-video w-1/2 rounded-lg bg-gray-700 bg-opacity-90 p-8 text-white"
+        onClick={focusInput}
+      >
         <input
           id="input"
           className="absolute opacity-0"
@@ -100,34 +109,34 @@ const TypingTest = () => {
                   }
 
                   return (
-                    <div key = {w_idx  + 'word'} className='inline-block'>
+                    <div key={w_idx + 'word'} className="inline-block">
                       &nbsp;
-                    <span
-                      key={w_idx + 'anchor'}
-                      className={`
+                      <span
+                        key={w_idx + 'anchor'}
+                        className={`
                                 ${highlight && 'text-green-600'} 
                                 ${currentWord && 'underline'}`}
-                    >
-                      {word.split('').map((letter, l_idx) => {
-                        const isCurrentWord = w_idx === completedWords.length
-                        const isWronglyTyped = letter !== inputValue[l_idx]
-                        const shouldBeHighlighted = l_idx < inputValue.length
-                        return (
-                          <span
-                            className={`letter ${
-                              isCurrentWord && shouldBeHighlighted
-                                ? isWronglyTyped
-                                  ? 'text-red-600'
-                                  : 'text-green-600'
-                                : ''
-                            }`}
-                            key={l_idx}
-                          >
-                            {letter}
-                          </span>
-                        )
-                      })}
-                    </span>
+                      >
+                        {word.split('').map((letter, l_idx) => {
+                          const isCurrentWord = w_idx === completedWords.length
+                          const isWronglyTyped = letter !== inputValue[l_idx]
+                          const shouldBeHighlighted = l_idx < inputValue.length
+                          return (
+                            <span
+                              className={`letter ${
+                                isCurrentWord && shouldBeHighlighted
+                                  ? isWronglyTyped
+                                    ? 'text-red-600' // Wrong letter Coloring
+                                    : 'text-green-600' // Correct letter Coloring
+                                  : ''
+                              }`}
+                              key={l_idx}
+                            >
+                              {letter}
+                            </span>
+                          )
+                        })}
+                      </span>
                     </div>
                   )
                 })}
