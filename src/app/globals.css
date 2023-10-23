@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* This will be used to hide scrollbar for words on the typing test */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
