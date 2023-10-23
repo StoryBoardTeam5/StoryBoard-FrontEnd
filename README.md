@@ -5,9 +5,9 @@
   <h3 align="center">
     This app is a real-time decision based story game that implements typing to earn points made for the decisions
   </h3>
-  <p> Live website can be found
+  <h2> Live website can be found
   <a href="https://storyboard-frontend.vercel.app/">HERE</a>
-   </p>
+   </h2>
   <hr />
   <br />
 </div>
