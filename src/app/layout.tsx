@@ -1,17 +1,24 @@
+/*
+File name     : src/app/layout.tsx
+Description   : Layout of the application includes MetaData, font, Navbar, and children
+LastEditBy    : Andres Lopez-Bormann
+CreatedDate   : 2023-09-22
+Revisions  :
+  2023-11-03 - Add Comments
+Preconditions: N/A
+Postconditions: Layout (Shell) of website is rendered
+*/
+
 import React from 'react'
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import bgImg from './_assets/bg-img.png'
-
 import './globals.css'
 
-import Image from 'next/image'
+import Navbar from './_components/NavBar/Navbar'
 
-import Navbar from './_components/Navbar'
-
-const inter = Inter({ subsets: ['latin'] }) // For font selection
+const inter = Inter({ subsets: ['latin'] }) // For font selection throughout website
 
 export const metadata: Metadata = {
   title: 'StoryBoard',
@@ -21,8 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className /* For font selection */}>
-        <Image src={bgImg} alt="" className="absolute h-screen-with-nav opacity-30" />
+      <body className={inter.className /* For font selection */ + 'h-screen, bg-gray-900 text-white'}>
         <Navbar />
         {children /* All pages on website are rendered here */}
       </body>

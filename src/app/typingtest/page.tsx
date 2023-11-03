@@ -1,3 +1,17 @@
+/*
+File name     : src/app/typingtest/page.tsx
+Description   : Layout of the application includes MetaData, font, Navbar, and children
+LastEditBy    : Andres Lopez-Bormann
+CreatedDate   : 2023-10-02
+Revisions  :
+  2023-10-22 - Add Typing Test Functionality
+  2023-11-03 - Add Comments
+Preconditions: - Typingtest will receive a prompt and a challenge
+Postconditions:
+  - Typing Test is rendered
+  - Typing Test will return WPM, Accuracy, and Time
+*/
+
 'use client'
 
 import React, { useEffect, useState } from 'react'

@@ -1,3 +1,14 @@
+/*
+File name     : src/app/login/page.tsx
+Description   : Login page for StoryBoard
+LastEditBy    : Andres Lopez-Bormann
+CreatedDate   : 2023-10-22
+Revisions :
+  2023-11-03 - Add Comments
+Preconditions: N/A
+Postconditions: Login page is rendered
+*/
+
 import React from 'react'
 
 // Login Component Here (TODO: Turn into modal)

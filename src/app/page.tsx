@@ -1,13 +1,22 @@
+/*
+File name     : src/app/page.tsx
+Description   : Home page of the application https://storyboard-frontend.vercel.app/
+LastEditBy    : Andres Lopez-Bormann
+CreatedDate   : 2023-09-22
+Revisions  :
+  2023-11-03 - Add Comments
+Preconditions: N/A
+Postconditions:
+*/
+
 import React from 'react'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
-import bgImg from './_assets/bg-img.png'
 
 const page = () => {
   return (
-    <section className="bg-gray-900 text-white ">
+    <section className=" ">
       <div className="z-10 mx-auto flex h-screen max-w-screen-xl items-center px-4">
         <div className="z-10 mx-auto max-w-3xl text-center">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text pb-1 text-3xl font-extrabold text-transparent sm:text-5xl">
