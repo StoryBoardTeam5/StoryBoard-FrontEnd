@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
     "prettier": "prettier --check 'src/**/*.{ts,tsx,js,jsx}'",

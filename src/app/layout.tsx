@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html className='p-4 pt-2' lang='en'>
       <body className={inter.className /* For font selection */ + 'h-screen, bg-gray-900 text-white'}>
         <Navbar />
         {children /* All pages on website are rendered here */}

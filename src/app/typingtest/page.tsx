@@ -91,23 +91,23 @@ const TypingTest = () => {
   const timer = Math.ceil(60 - timeElapsed)
 
   return (
-    <div id="body" className="flex h-screen content-center items-center justify-center bg-gray-900">
+    <div id='body' className='flex h-screen content-center items-center justify-center bg-gray-900'>
       <div
-        id="Wrapper"
-        className="z-10 aspect-video w-1/2 rounded-lg bg-gray-700 bg-opacity-90 p-8 text-white"
+        id='Wrapper'
+        className='z-10 aspect-video w-1/2 rounded-lg bg-gray-700 bg-opacity-90 p-8 text-white'
         onClick={focusInput}
       >
         <input
-          id="input"
-          className="absolute opacity-0"
-          type="text"
+          id='input'
+          className='absolute opacity-0'
+          type='text'
           autoFocus={true}
-          autoComplete="off"
+          autoComplete='off'
           onChange={handleInput}
           value={inputValue}
         />
-        <div id="content-box" className="aspect-video rounded-lg border-2 border-slate-600 p-4">
-          <div id="typing-test" className="no-scrollbar max-h-60 overflow-y-auto">
+        <div id='content-box' className='aspect-video rounded-lg border-2 border-slate-600 p-4'>
+          <div id='typing-test' className='no-scrollbar max-h-60 overflow-y-auto'>
             {!started || completed
               ? 'Press start to start'
               : prompt.split(' ').map((word, w_idx) => {
@@ -123,7 +123,7 @@ const TypingTest = () => {
                   }
 
                   return (
-                    <div key={w_idx + 'word'} className="inline-block">
+                    <div key={w_idx + 'word'} className='inline-block'>
                       &nbsp;
                       <span
                         key={w_idx + 'anchor'}
@@ -155,24 +155,24 @@ const TypingTest = () => {
                   )
                 })}
           </div>
-          <div id="content" className="mt-4 flex-col justify-between border-t-2 border-gray-600 py-4">
-            <ul id="result-details" className="flex-col justify-between">
+          <div id='content' className='mt-4 flex-col justify-between border-t-2 border-gray-600 py-4'>
+            <ul id='result-details' className='flex-col justify-between'>
               <li>
                 Timer:{' '}
-                <span id="time" className="ml-2 text-lg">
+                <span id='time' className='ml-2 text-lg'>
                   {timer > 0 ? timer : 0}
                 </span>
               </li>
               <li>
                 Words Per Minute:{' '}
-                <span id="WPM" className="ml-2 text-lg">
+                <span id='WPM' className='ml-2 text-lg'>
                   {wpm >= 0 ? wpm : 0}
                 </span>
               </li>
             </ul>
             <button
-              id="start-button"
-              className="rounded border border-white bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-slate-500 hover:text-gray-500"
+              id='start-button'
+              className='rounded border border-white bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-slate-500 hover:text-gray-500'
               onClick={startGame}
             >
               Start Game
