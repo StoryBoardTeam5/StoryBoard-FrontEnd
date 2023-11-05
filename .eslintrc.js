@@ -1,15 +1,21 @@
+/*
+File name     : .eslintrc.js
+Description   : ESLint configuration file. Used for linting the code.
+LastEditBy    : Andres Lopez-Bormann
+CreatedDate   : 2023-10-02
+Revisions  :
+  2023-11-03 - Add Comments
+Preconditions: N/A
+Postconditions: Exports are Used for linting the code.
+*/
+
 module.exports = {
   env: {
     browser: true,
     es2021: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
