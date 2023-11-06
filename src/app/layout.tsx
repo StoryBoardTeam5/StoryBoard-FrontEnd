@@ -5,6 +5,7 @@ LastEditBy    : Andres Lopez-Bormann
 CreatedDate   : 2023-09-22
 Revisions  :
   2023-11-03 - Add Comments
+  2023-11-05 - Update Styling
 Preconditions: N/A
 Postconditions: Layout (Shell) of website is rendered
 */
@@ -27,8 +28,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className='p-4 pt-2' lang='en'>
-      <body className={inter.className /* For font selection */ + 'h-screen, bg-gray-900 text-white'}>
+    <html
+      className='h-screen-with-nav bg-colors-background-50 p-4 pt-2 text-colors-text-900 dark:bg-colors-background-950 dark:text-colors-text-100'
+      lang='en'
+    >
+      <body className={inter.className /* For font selection */}>
         <Navbar />
         {children /* All pages on website are rendered here */}
       </body>

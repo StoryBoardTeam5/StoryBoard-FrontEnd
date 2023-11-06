@@ -5,7 +5,7 @@ LastEditBy    : Andres Lopez-Bormann
 CreatedDate   : 2023-10-02
 Revisions  :
   2023-10-22 - Add Typing Test Functionality
-  2023-11-03 - Add Comments
+  2023-11-03 - Add Comments / Turned into a component
 Preconditions: - Typingtest will receive a prompt and a challenge
 Postconditions:
   - Typing Test is rendered
@@ -91,10 +91,10 @@ const TypingTest = () => {
   const timer = Math.ceil(60 - timeElapsed)
 
   return (
-    <div id='body' className='flex h-screen content-center items-center justify-center bg-gray-900'>
+    <div id='body' className='flex h-screen-with-nav content-center items-center justify-center'>
       <div
         id='Wrapper'
-        className='z-10 aspect-video w-1/2 rounded-lg bg-gray-700 bg-opacity-90 p-8 text-white'
+        className='z-10 aspect-video w-1/2 rounded-lg bg-colors-primary-100 bg-opacity-90 p-8 dark:bg-colors-primary-800'
         onClick={focusInput}
       >
         <input
@@ -106,7 +106,10 @@ const TypingTest = () => {
           onChange={handleInput}
           value={inputValue}
         />
-        <div id='content-box' className='aspect-video rounded-lg border-2 border-slate-600 p-4'>
+        <div
+          id='content-box'
+          className='aspect-video rounded-lg border-2 border-colors-secondary-400 p-4 dark:border-colors-secondary-600'
+        >
           <div id='typing-test' className='no-scrollbar max-h-60 overflow-y-auto'>
             {!started || completed
               ? 'Press start to start'
@@ -155,7 +158,10 @@ const TypingTest = () => {
                   )
                 })}
           </div>
-          <div id='content' className='mt-4 flex-col justify-between border-t-2 border-gray-600 py-4'>
+          <div
+            id='content'
+            className='mt-4 flex-col justify-between border-t-2 border-colors-secondary-400 py-4 dark:border-colors-secondary-600'
+          >
             <ul id='result-details' className='flex-col justify-between'>
               <li>
                 Timer:{' '}
@@ -172,7 +178,7 @@ const TypingTest = () => {
             </ul>
             <button
               id='start-button'
-              className='rounded border border-white bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-slate-500 hover:text-gray-500'
+              className='rounded border border-colors-secondary-400 bg-transparent px-4 py-2 font-semibold hover:border-transparent hover:bg-colors-secondary-200 hover:text-colors-secondary-600 dark:border-colors-secondary-600  dark:hover:bg-colors-secondary-200'
               onClick={startGame}
             >
               Start Game

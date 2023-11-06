@@ -5,6 +5,7 @@ LastEditBy    : Andres Lopez-Bormann
 CreatedDate   : 2023-10-22
 Revisions  :
   2023-11-03 - Add Comments
+  2023-11-05 - Styling updates
 Preconditions: N/A
 Postconditions:
   - Navigation bar is rendered
@@ -22,9 +23,9 @@ const Navbar = () => {
   }
 
   return (
-    <header id='header' className='bg-white dark:bg-gray-900'>
-      <div className='mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
-        <Link className='z-10 block text-teal-600 dark:text-teal-300' href='/'>
+    <header id='header'>
+      <div className='h-16 mx-auto flex max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
+        <Link className='z-10 block text-colors-primary-800 dark:text-colors-primary-200' href='/'>
           StoryBoard Logo Here
         </Link>
 
@@ -44,16 +45,16 @@ const Navbar = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-            <div className='sm:flex sm:gap-4'>
+            <div className='sm:flex sm:gap-6'>
               <Link
-                className='block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500'
+                className='rounded-md bg-colors-secondary-200 px-5 py-2.5 text-sm font-medium transition hover:bg-colors-secondary-300 dark:bg-colors-secondary-800 dark:hover:bg-colors-secondary-700'
                 href='/login'
               >
                 Login
               </Link>
 
               <Link
-                className='hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75 sm:block'
+                className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-sm font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
                 href='/register'
               >
                 Register
@@ -62,7 +63,7 @@ const Navbar = () => {
 
             <button
               onClick={handleMenu}
-              className='block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75 md:hidden'
+              className='block rounded bg-colors-accent-600 p-2.5 text-colors-text-200 transition hover:text-colors-text-400 dark:bg-colors-accent-400 dark:text-colors-text-800 dark:hover:text-colors-text-100 md:hidden'
             >
               <span className='sr-only'>Toggle menu</span>
               <svg
