@@ -9,7 +9,6 @@ Revisions  :
 Preconditions: N/A
 Postconditions: Layout (Shell) of website is rendered
 */
-
 import React from 'react'
 
 import type { Metadata } from 'next'
@@ -18,6 +17,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 
 import Navbar from './_components/NavBar/Navbar'
+import { ClientProviders } from './_utils/ClientProviders'
 
 const inter = Inter({ subsets: ['latin'] }) // For font selection throughout website
 
@@ -28,14 +28,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      className='h-screen-with-nav bg-colors-background-50 p-4 pt-2 text-colors-text-900 dark:bg-colors-background-950 dark:text-colors-text-100'
-      lang='en'
-    >
-      <body className={inter.className /* For font selection */}>
-        <Navbar />
-        {children /* All pages on website are rendered here */}
-      </body>
+    <html lang='en'>
+        <body className={inter.className /* For font selection */}>
+        <ClientProviders >
+          <div className='min-h-screen bg-colors-background-50 text-colors-text-900 dark:bg-colors-background-950 dark:text-colors-text-100'>
+            <Navbar />
+            {children /* All pages on website are rendered here */}
+          </div>
+          </ClientProviders>
+        </body>
     </html>
   )
 }
