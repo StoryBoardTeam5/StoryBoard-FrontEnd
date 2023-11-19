@@ -1,0 +1,65 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "User Schema",
+    "required": [
+        "id",
+        "email",
+        "password",
+        "full name",
+        "saves"
+    ],
+    "properties": {
+        "id": {
+            "type": "int",
+            "default": 0,
+            "title": "User ID",
+            "examples": [
+                5
+            ]
+        },
+        "email": {
+            "type": "string",
+            "default": "",
+            "title": "email",
+            "examples": [
+                "email@email.com"
+            ]
+        },
+        "password": {
+            "type": "string",
+            "default": "",
+            "title": "password",
+            "examples": [
+                "password123"
+            ]
+        },
+        "Full name": {
+            "type": "string",
+            "default": "John Doe",
+            "title": "Full Name",
+            "examples": [
+                "Jane Doe"
+            ]
+        },
+        "Saves": {
+            "type": "int",
+            "default": "John Doe",
+            "title": "Full Name",
+            "examples": [
+                "Jane Doe"
+            ]
+        }
+    },
+
+    "examples": [{
+        "id": 1234,
+        "email": "abc@gmail.com",
+        "password": "pass1234",
+        "Full name": "John Doe",
+        "saves": 222
+       
+    }]
+}

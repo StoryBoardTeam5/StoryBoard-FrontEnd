@@ -1,0 +1,65 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Progress Schema",
+    "required": [
+        "id",
+        "userID",
+        "plotploint",
+        "skills",
+        "points"
+    ],
+    "properties": {
+        "id": {
+            "type": "int",
+            "default": 0,
+            "title": "Progress ID",
+            "examples": [
+                5
+            ]
+        },
+        "userID": {
+            "type": "int",
+            "default": 0,
+            "title": "User Ref ID",
+            "examples": [
+                222
+            ]
+        },
+        "plotploint": {
+            "type": "int",
+            "default": 0,
+            "title": "Current plot point",
+            "examples": [
+               3
+            ]
+        },
+        "skill": {
+            "type": "int",
+            "default": 0,
+            "title": "Skill Reference ID",
+            "examples": [
+                22
+            ]
+        },
+        "points": {
+            "type": "int",
+            "default": 0,
+            "title": "Total Points",
+            "examples": [
+                34
+            ]
+        }
+    },
+
+    "examples": [{
+        "id": 1234,
+        "email": "abc@gmail.com",
+        "password": "pass1234",
+        "Full name": "John Doe",
+        "saves": 222
+       
+    }]
+}
