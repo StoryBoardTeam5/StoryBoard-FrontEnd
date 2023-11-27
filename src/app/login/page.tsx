@@ -15,7 +15,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 // Login Component Here (TODO: Turn into modal)
-export const Login = () => {
+const Login = () => {
   const [userName, setUser] = useState('')
   const [pass, setPass] = useState('')
   const handleSubmit = (e) => {

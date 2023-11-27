@@ -15,7 +15,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 // Register Component Here (TODO: Turn into modal)
-export const Register = () => {
+const Register = () => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [name, setName] = useState('')
