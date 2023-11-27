@@ -20,7 +20,7 @@ const Register = () => {
   const [pass, setPass] = useState('')
   const [name, setName] = useState('')
   const [userName, setUser] = useState('')
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(email)
   }

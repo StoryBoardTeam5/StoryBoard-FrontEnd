@@ -18,7 +18,7 @@ import Link from 'next/link'
 const Login = () => {
   const [userName, setUser] = useState('')
   const [pass, setPass] = useState('')
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(userName)
   }
