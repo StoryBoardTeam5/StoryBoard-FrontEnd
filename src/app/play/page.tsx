@@ -18,7 +18,6 @@ import Dialog from '../_components/Dialog/dialog'
 import TypingTest from '../_components/TypingTest/typingtest'
 
 const Play = () => {
-
   const [currentMode, setCurrentMode] = useState('Dialog')
   console.log(currentMode)
 
