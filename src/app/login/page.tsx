@@ -4,7 +4,7 @@ Description   : Login page for StoryBoard
 LastEditBy    : Vance Malekani 
 CreatedDate   : 2023-10-22
 Revisions :
-  2023-11-03 - Add Comments
+  2023-11-03 - Add Comments / Styling Updates
 Preconditions: N/A
 Postconditions: Login page is rendered
 */
@@ -53,6 +53,7 @@ export const Login = () => {
       </p>
       </div>
       </form>
+
     </div>
   )
 }
