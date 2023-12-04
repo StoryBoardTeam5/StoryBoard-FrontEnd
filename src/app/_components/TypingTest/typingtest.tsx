@@ -16,7 +16,8 @@ Postconditions:
 
 import React, { useEffect, useState } from 'react'
 
-const TypingTest = () => {
+const TypingTest = ({ promptID }: { promptID: string }) => {
+  const backendURL = 'https://storyboard-backend.vercel.app'
   const [prompt, setPrompt] = useState('')
   const [untypedWords, setUntypedWords] = useState([''])
   const [completedWords, setCompletedWords] = useState([''])
@@ -28,10 +29,18 @@ const TypingTest = () => {
   const [wpm, setWpm] = useState(0)
 
   /* Get the prompt of what we want the user to type here from MongoDB here */
-  const GetPrompt = (prompt: string) => {
-    setPrompt(prompt)
-    setUntypedWords(prompt.split(' '))
-    setCompletedWords([])
+  const GetPrompt = async (prompt: string) => {
+    try{
+      const data = await (await fetch(backendURL + '/prompt/' + prompt)).json()
+      setPrompt(data.prompt)
+      setUntypedWords(data.prompt.split(' '))
+      setCompletedWords([])
+    } catch (e) {
+      console.log(e)
+      setPrompt('Error getting prompt')
+      setUntypedWords(['Error'])
+      setCompletedWords([])
+    }
   }
 
   /* Called at start to make sure the input is always in focus */
@@ -43,9 +52,7 @@ const TypingTest = () => {
   const startGame = () => {
     setInputValue('')
     focusInput()
-    GetPrompt(
-      'This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt This is a test prompt',
-    )
+    GetPrompt(promptID)
     setStarted(true)
     setCompleted(false)
     setStartTime(Date.now())

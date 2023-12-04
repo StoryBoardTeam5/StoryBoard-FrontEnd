@@ -10,7 +10,11 @@
    </h2>
   <hr />
   <br />
-</div>
+  <h2> The Backend for Storyboard can be found
+  <a href="https://github.com/StoryBoardTeam5/StoryBoard-BackEnd">HERE</a>
+   </h2>
+  <hr />
+  <br /></div>
 
 ### To start the project locally run the following commands
 
@@ -28,3 +32,4 @@
     "prettier": "prettier --check 'src/**/*.{ts,tsx,js,jsx}'",
     "prettier:fix": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'"
 ```
+
