@@ -1,0 +1,137 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Story Schema",
+    "required": [
+        "id",
+        "title",
+        "description",
+        "img",
+        "lastplot"
+
+    ],
+    "properties": {
+        "id": {
+            "type": "int",
+            "default": 0,
+            "title": "User ID",
+            "examples": [
+                5
+            ]
+        },
+        "WPM": {
+            "type": "object",
+            "default": {},
+            "title": "WPM Record",
+            "required": [
+                "AvgWPM"
+            ],
+            "properties": {
+                "AvgWPM": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The Average WPM",
+                    "examples": [
+                        50
+                    ]
+                },
+                "LastFive": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The Last 5 WPM Recorded",
+                    "examples": [
+                        [50, 60, 70],
+                        [50, 60, 70, 80, 40]
+                    ]
+                }
+            },
+            "examples": [{
+                "AvgWPM": 65,
+                "LastFive": [50, 60, 70, 80, 40]
+
+            }]
+        },
+        "Accuracy": {
+            "type": "object",
+            "default": {},
+            "title": "Accuracy Record",
+            "required": [
+                "AvgAcc"
+            ],
+            "properties": {
+                "AvgAcc": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The Average Accuracy",
+                    "examples": [
+                        50
+                    ]
+                },
+                "LastFive": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The Last 5 Accuracy Recorded",
+                    "examples": [
+                        [90, 60, 70],
+                        [50, 60, 70, 80, 40]
+                    ]
+                }
+            },
+            "examples": [{
+                "AvgAcc": 76,
+                "LastFive": [50, 60, 70, 80, 40]
+
+            }]
+        },
+        "Speed": {
+            "type": "object",
+            "default": {},
+            "title": "Speed Record",
+            "required": [
+                "AvgSpeed"
+            ],
+            "properties": {
+                "AvgSpeed": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The Average Speed",
+                    "examples": [
+                        50
+                    ]
+                },
+                "LastFive": {
+                    "type": "array",
+                    "default": [],
+                    "title": "The Last 5 Speeds Recorded",
+                    "examples": [
+                        [50, 60, 70],
+                        [50, 60, 70, 80, 40]
+                    ]
+                }
+            },
+            "examples": [{
+                "AvgSpeed": 65,
+                "LastFive": [50, 60, 70, 80, 40]
+
+            }]
+        }
+    },
+    "examples": [{
+        "id": 1234,
+        "WPM": {
+            "AvgWPM": 50,
+            "Last5": [50, 40]
+        },
+        "Accuracy": {
+            "AvgAcc": 50,
+            "Last5": [90, 80]
+        },
+        "Speed": {
+            "AvgSpeed": 50,
+            "Last5": [10]
+        }
+       
+    }]
+}

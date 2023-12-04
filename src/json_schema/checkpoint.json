@@ -1,0 +1,50 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Checkpoint Schema",
+    "required": [
+        "id",
+        "staqe",
+        "recap",
+        "Dialog",
+        "TypingTest",
+        "Decision"
+
+    ],
+    "properties": {
+        "id": {
+            "type": "int",
+            "default": 0,
+            "title": "Checkpoint ID",
+            "examples": [
+                5
+            ]
+        },
+        "stage": {
+            "type": "int",
+            "default": 1,
+            "title": "stage",
+            "exclusiveMinimum": 1,
+            "exclusiveMaximum": 3
+        },
+        "Recap": {
+            "type": "string",
+            "default": "",
+            "title": "Content Recap"
+        },
+        "Dialog": {
+            "type": "object",
+            "default": {},
+            "title": "Speed Record",
+            "$ref": "./dialog.json"
+        },
+        "TypingTest": {
+            "type": "object",
+            "default": {},
+            "title": "Typing Test Record",
+            "$ref": "./typingest.json"
+        }
+    }
+}

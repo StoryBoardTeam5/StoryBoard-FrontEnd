@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Decision Schema",
+    "required": [
+        "Question",
+        "Choice 1",
+        "Choice 2"
+    ],
+    "properties": {
+        "Question": {
+            "type": "string",
+            "title": "Question ID",
+            "examples": [
+                "Would you like a ...."
+            ]
+        },
+        "Choice 1": {
+            "type": "string",
+            "default": {},
+            "title": "Choice 1",
+            "examples": [
+                "A black coffee"
+                ]
+
+            }
+        },
+        "Choice 1": {
+            "type": "string",
+            "default": {},
+            "title": "Choice 1",
+            "examples": [
+                "A black coffee"
+                ]
+
+            },
+        
+  
+    "examples": [
+       { "Question": "How would you like your coffee",
+        "Choice 1": "Black Coffee",
+        "Choice 2": "With Cream and Sugar"
+    }
+       ]
+}
