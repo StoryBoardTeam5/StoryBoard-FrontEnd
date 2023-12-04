@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Speed Schema",
+    "required": [
+        "Time",
+        "Speed"
+
+    ],
+    "properties": {
+        "Time": {
+            "type": "string",
+            "default": "00:00:00",
+            "title": "Accuracy Record",
+            "example": ["00:00:00"]
+        },
+        "Speed": {
+            "type": "float",
+            "default": 0,
+            "title": "Accuracy Record",
+            "example": [9.5]
+        }
+    },
+    "examples": [{
+        "time": "12:34",
+        "Speed": 10.1
+       
+    }]
+}

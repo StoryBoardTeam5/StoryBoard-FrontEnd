@@ -1,0 +1,37 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Dialog Schema",
+    "required": [
+        "id",
+        "speaker",
+        "text",
+        "characters"
+    ],
+    "properties": {
+        "id": {
+            "type": "number",
+            "default": 1,
+            "title": "ID",
+            "example": [12352]
+        },
+        "Speaker": {
+            "type": "string",
+            "default": "John",
+            "title": "Speaker",
+            "example": ["Andres", "Alexis", "Vance"]
+        },
+        "Text": {
+            "type": "string",
+            "title": "Speaker",
+            "example": ["lorem ipsum ajbfdskfds"]
+        },
+        "Characters": {
+            "type": "array",
+            "title": "Characteres",
+            "example": [["Sandra", "Allie"]]
+        }
+    }
+}
