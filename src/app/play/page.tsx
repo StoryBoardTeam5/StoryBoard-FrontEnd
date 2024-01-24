@@ -5,6 +5,7 @@ LastEditBy    : Andres Lopez-Bormann
 CreatedDate   : 2023-11-03
 Revisions  :
   2023-11-05 - Creation Date
+  2023-12-03 - Update get Typing test prompt from DB
 Preconditions:
 Postconditions: Game Navigation is rendered and user can switch between modes
 */
@@ -18,9 +19,14 @@ import Dialog from '../_components/Dialog/dialog'
 import TypingTest from '../_components/TypingTest/typingtest'
 
 const Play = () => {
-
   const [currentMode, setCurrentMode] = useState('Dialog')
+  const [promptID, setPromptID] = useState('656d272e2af5dc553cc2acba')
   console.log(currentMode)
+
+  const handlePromptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setPromptID(e.target.value)
+  }
 
   const handleDialog = () => {
     setCurrentMode('Dialog')
@@ -31,21 +37,38 @@ const Play = () => {
   const handleTypingTest = () => {
     setCurrentMode('TypingTest')
   }
-
   return (
     <div className=''>
       {/* Buttons are here to switch between modes, remove later */}
-      <div className='m-auto mt-10 flex w-64 justify-between'>
+      <div className='m-auto mt-10 flex w-96 justify-between'>
         <button onClick={handleDialog}>Dialog</button>
         <button onClick={handleDecision}>Decision</button>
         <button onClick={handleTypingTest}>TypingTest</button>
       </div>
+      <div className='m-auto flex'>
+        <span className='m-auto mt-10 flex text-2xl'>{currentMode}</span>
+      </div>
+
+      {/* Input is here to switch between prompts, remove later */}
+      {currentMode === 'TypingTest' ? (
+        <div className='m-auto flex w-96'>
+          <span className='m-auto mt-10 flex '>Prompt ID:</span>
+          <input
+            className='m-auto mt-10 w-64 '
+            type='text'
+            autoComplete='off'
+            onChange={handlePromptChange}
+            value={promptID}
+          />
+        </div>
+      ) : null}
+
       {currentMode === 'Dialog' ? (
         <Dialog />
       ) : currentMode === 'Decision' ? (
         <Decision />
       ) : currentMode === 'TypingTest' ? (
-        <TypingTest />
+        <TypingTest promptID={promptID} />
       ) : null}
     </div>
   )
