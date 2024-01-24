@@ -9,9 +9,18 @@ Preconditions: N/A
 Postconditions: Decision page is rendered
 */
 
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 
 const Decision = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 1000, // Change this value to control the scroll distance
+      behavior: 'smooth', // This adds smooth scrolling animation
+    });
+  }, []);
+
+
   return (
     <div>
       <div
