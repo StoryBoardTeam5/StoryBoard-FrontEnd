@@ -15,9 +15,8 @@ const Dialog = () => {
       backgroundImage: "url(/cafe.png)" }}>
       {/* <h1 className='m-auto text-8xl'>Dialog</h1> */}
       <div className='flex flex-row justify-between'>
-
-          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="image description"></img>
-          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="image description"></img>
+          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="person 1"></img>
+          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="person 2"></img>
       </div>
       {/* The dialog text */}
       <div className='fixed bottom-0 left-0 z-50 my-10 mx-40'>
