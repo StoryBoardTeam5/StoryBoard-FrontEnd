@@ -11,7 +11,7 @@ Postconditions: Game Navigation is rendered and user can switch between modes
 */
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // import { useRouter } from 'next/router'
 import Decision from '../_components/Decision/decision'
@@ -20,8 +20,26 @@ import TypingTest from '../_components/TypingTest/typingtest'
 
 const Play = () => {
   const [currentMode, setCurrentMode] = useState('Dialog')
-  const [promptID, setPromptID] = useState('656d272e2af5dc553cc2acba')
-  console.log(currentMode)
+  const [promptID, setPromptID] = useState('65b756abf47ca82d44ed9eba')
+
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 1000, // Change this value to control the scroll distance
+      behavior: 'smooth', // This adds smooth scrolling animation
+    })
+    if (currentMode === 'Dialog') {
+      setCurrentMode('Decision')
+    }
+        if (currentMode === 'Decision') {
+      setCurrentMode('TypingTest')
+    }
+    if (currentMode === 'TypingTest') {
+      setCurrentMode('Dialog')
+    }
+  }
+  , [promptID])
+
 
   const handlePromptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -50,9 +68,9 @@ const Play = () => {
       </div>
 
       {/* Input is here to switch between prompts, remove later */}
-      {currentMode === 'TypingTest' ? (
+      {currentMode === 'TypingTest' || currentMode === 'Decision'? (
         <div className='m-auto flex w-96'>
-          <span className='m-auto mt-10 flex '>Prompt ID:</span>
+          <span className='m-auto mt-10 flex '>prompt ID:</span>
           <input
             className='m-auto mt-10 w-64 '
             type='text'
@@ -66,7 +84,7 @@ const Play = () => {
       {currentMode === 'Dialog' ? (
         <Dialog />
       ) : currentMode === 'Decision' ? (
-        <Decision />
+        <Decision setPromptID={setPromptID} decisionID={promptID}/>
       ) : currentMode === 'TypingTest' ? (
         <TypingTest promptID={promptID} />
       ) : null}
