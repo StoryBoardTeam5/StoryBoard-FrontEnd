@@ -48,7 +48,7 @@ const Decision = ({ decisionID, setPromptID,}: { decisionID: string , setPromptI
       <div
         className='-z-50 min-h-screen'
         style={{
-          backgroundImage: 'url(/cafe.png)',
+          backgroundImage: 'url(/cafe.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
         }}
       />
       <div className='fixed bottom-32 left-1/2 flex w-3/4  -translate-x-1/2 transform content-center items-center justify-center'>
