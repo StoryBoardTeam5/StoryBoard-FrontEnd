@@ -27,11 +27,19 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
   const [timeElapsed, setTimeElapsed] = useState(0)
   const [completed, setCompleted] = useState(false)
   const [wpm, setWpm] = useState(0)
-
+  const [startText, setStartText] = useState('Start Game')
+  useEffect(() => {
+    window.scrollTo({
+      top: 1000, // Change this value to control the scroll distance
+      behavior: 'smooth', // This adds smooth scrolling animation
+    })
+      GetPrompt(promptID)
+  }, [])
   /* Get the prompt of what we want the user to type here from MongoDB here */
   const GetPrompt = async (prompt: string) => {
     try{
-      const data = await (await fetch(backendURL + '/prompt/' + prompt)).json()
+      const data = await (await fetch(backendURL + '/typingtest/' + prompt)).json()
+      setStartText(data.text)
       setPrompt(data.prompt)
       setUntypedWords(data.prompt.split(' '))
       setCompletedWords([])
@@ -52,7 +60,6 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
   const startGame = () => {
     setInputValue('')
     focusInput()
-    GetPrompt(promptID)
     setStarted(true)
     setCompleted(false)
     setStartTime(Date.now())
@@ -98,7 +105,13 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
   const timer = Math.ceil(60 - timeElapsed)
 
   return (
+    <div
+    className='-z-50 min-h-screen'
+        style={{
+          backgroundImage: 'url(/cafe.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
+        }}>
     <div id='body' className='flex h-screen-with-nav content-center items-center justify-center'>
+
       <div
         id='Wrapper'
         className='z-10 aspect-video w-1/2 rounded-lg bg-colors-primary-100 bg-opacity-90 p-8 dark:bg-colors-primary-800'
@@ -119,7 +132,7 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
         >
           <div id='typing-test' className='no-scrollbar max-h-60 overflow-y-auto'>
             {!started || completed
-              ? 'Press start to start'
+              ? startText
               : prompt.split(' ').map((word, w_idx) => {
                   let highlight = false
                   let currentWord = false
@@ -193,6 +206,7 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
