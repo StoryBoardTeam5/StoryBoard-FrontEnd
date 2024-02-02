@@ -12,8 +12,9 @@ import React from 'react'
 import Typewriter from "./Typewriter";
 const Dialog = () => {
   return (
-    <div className='flex flex-col h-screen-with-nav' style={{ 
-      backgroundImage: "url(/cafe.png)", backgroundRepeat: 'no-repeat'}}>
+    <div>
+    <div className='flex flex-col -z-50 min-h-screen' style={{ 
+      backgroundImage: "url(/cafe.png)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
       {/* <h1 className='m-auto text-8xl'>Dialog</h1> */}
       <div className='flex flex-row justify-between'>
           <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="person 1"></img>
@@ -28,6 +29,7 @@ const Dialog = () => {
         </div>
         </div>
       </div>   
+    </div>
     </div>
   )
 }
