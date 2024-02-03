@@ -12,7 +12,7 @@ Postconditions: Layout (Shell) of website is rendered
 import NextAuth from 'next-auth/next'
 import Github from 'next-auth/providers/github'
 
-export const authOptions = {
+const authOptions = {
   providers: [
     Github({
       clientId: process.env.GITHUB_ID ?? '',
