@@ -12,11 +12,17 @@ Postconditions: Decision page is rendered
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import type { RootState } from '../../_redux/store'
+import { setRefID } from '@/app/_redux/refIDSlice'
 
-const Decision = ({ decisionID, setPromptID,}: { decisionID: string , setPromptID: React.Dispatch<React.SetStateAction<string>> }) => {
+
+const Decision = () => {
   const [question, setQuestion] = useState('')
   const [choice1, setChoice1] = useState({ option: '', TestRefID: '' })
   const [choice2, setChoice2] = useState({ option: '', TestRefID: '' })
+  const refID = useSelector((state: RootState) => state.refID.value)
+  const dispatch = useDispatch()
 
   const backendURL = 'https://storyboard-backend.vercel.app'
 
@@ -27,7 +33,7 @@ const Decision = ({ decisionID, setPromptID,}: { decisionID: string , setPromptI
     })
 
     setTimeout(() => {
-      GetDecision(decisionID)
+      GetDecision(refID)
     }, 1000)
   }, [])
 
@@ -62,10 +68,10 @@ const Decision = ({ decisionID, setPromptID,}: { decisionID: string , setPromptI
                 What do you choose?
               </h5>
               <div className='flex flex-row justify-evenly p-16'>
-                <button onClick={()=>setPromptID(choice1.TestRefID)} className='m-auto w-1/3 rounded-lg border border-gray-200 bg-white p-6 opacity-95 shadow hover:bg-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900'>
+                <button onClick={()=>dispatch(setRefID(choice1.TestRefID))} className='m-auto w-1/3 rounded-lg border border-gray-200 bg-white p-6 opacity-95 shadow hover:bg-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900'>
                   {choice1?.option}
                 </button>
-                <button onClick={()=>setPromptID(choice2.TestRefID)} className='m-auto block w-1/3 rounded-lg border border-gray-200 bg-white p-6 opacity-95 shadow hover:bg-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900'>
+                <button onClick={()=>dispatch(setRefID(choice2.TestRefID))} className='m-auto block w-1/3 rounded-lg border border-gray-200 bg-white p-6 opacity-95 shadow hover:bg-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900'>
                   {choice2?.option}
                 </button>
               </div>

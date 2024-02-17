@@ -16,7 +16,13 @@ Postconditions:
 
 import React, { useEffect, useState } from 'react'
 
-const TypingTest = ({ promptID }: { promptID: string }) => {
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setRefID } from '../../_redux/refIDSlice'
+import { RootState } from '../../_redux/store'
+
+const TypingTest = () => {
+  const refID = useSelector((state: RootState) => state.refID.value)
   const backendURL = 'https://storyboard-backend.vercel.app'
   const [prompt, setPrompt] = useState('')
   const [untypedWords, setUntypedWords] = useState([''])
@@ -33,11 +39,11 @@ const TypingTest = ({ promptID }: { promptID: string }) => {
       top: 1000, // Change this value to control the scroll distance
       behavior: 'smooth', // This adds smooth scrolling animation
     })
-      GetPrompt(promptID)
+    GetPrompt(refID)
   }, [])
   /* Get the prompt of what we want the user to type here from MongoDB here */
   const GetPrompt = async (prompt: string) => {
-    try{
+    try {
       const data = await (await fetch(backendURL + '/typingtest/' + prompt)).json()
       setStartText(data.text)
       setPrompt(data.prompt)

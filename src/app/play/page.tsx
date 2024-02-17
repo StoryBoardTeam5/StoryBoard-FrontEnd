@@ -13,39 +13,37 @@ Postconditions: Game Navigation is rendered and user can switch between modes
 
 import React, { useEffect, useState } from 'react'
 
-// import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Decision from '../_components/Decision/decision'
 import Dialog from '../_components/Dialog/dialog'
 import TypingTest from '../_components/TypingTest/typingtest'
+import { setRefID } from '../_redux/refIDSlice'
+import type { RootState } from '../_redux/store'
 
 const Play = () => {
-  const [currentMode, setCurrentMode] = useState('Dialog')
-  const [promptID, setPromptID] = useState('65b756abf47ca82d44ed9eba')
+  const [currentMode, setCurrentMode] = useState('')
 
+  const refID = useSelector((state: RootState) => state.refID.value)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    window.scrollTo({
-      top: 1000, // Change this value to control the scroll distance
-      behavior: 'smooth', // This adds smooth scrolling animation
-    })
-    if (currentMode === 'Dialog') {
-      setCurrentMode('Decision')
-    }
-        if (currentMode === 'Decision') {
-      setCurrentMode('TypingTest')
-    }
-    if (currentMode === 'TypingTest') {
+    if (currentMode === '') {
       setCurrentMode('Dialog')
     }
-  }
-  , [promptID])
-
+    if (currentMode === 'Dialog') {
+      setCurrentMode('Decision')
+    } else if (currentMode === 'Decision') {
+      setCurrentMode('TypingTest')
+    } else if (currentMode === 'TypingTest') {
+      setCurrentMode('Dialog')
+    }
+  }, [refID])
 
   const handlePromptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    setPromptID(e.target.value)
+    dispatch(setRefID(e.target.value))
   }
-
   const handleDialog = () => {
     setCurrentMode('Dialog')
   }
@@ -68,7 +66,7 @@ const Play = () => {
       </div>
 
       {/* Input is here to switch between prompts, remove later */}
-      {currentMode === 'TypingTest' || currentMode === 'Decision'? (
+      {currentMode === 'TypingTest' || currentMode === 'Decision' ? (
         <div className='m-auto flex w-96'>
           <span className='m-auto mt-10 flex '>prompt ID:</span>
           <input
@@ -76,7 +74,7 @@ const Play = () => {
             type='text'
             autoComplete='off'
             onChange={handlePromptChange}
-            value={promptID}
+            value={refID}
           />
         </div>
       ) : null}
@@ -84,12 +82,13 @@ const Play = () => {
       {currentMode === 'Dialog' ? (
         <Dialog />
       ) : currentMode === 'Decision' ? (
-        <Decision setPromptID={setPromptID} decisionID={promptID}/>
+        <Decision />
       ) : currentMode === 'TypingTest' ? (
-        <TypingTest promptID={promptID} />
-      ) : null}
+        <TypingTest />
+      ) : (
+        <div>Test</div>
+      )}
     </div>
   )
 }
-
 export default Play
