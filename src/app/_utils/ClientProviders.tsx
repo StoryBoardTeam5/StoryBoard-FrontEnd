@@ -6,9 +6,13 @@ import { ThemeProvider } from 'next-themes'
 import { Provider } from 'react-redux'
 
 import { store } from '../_redux/store'
+import { useLoaded } from './useLoaded'
 
 export const ClientProviders = ({ children }: { children: React.ReactNode }) => {
-  return (
+
+  const loaded = useLoaded()
+
+  return ( loaded &&
     <Provider store={store}>
       <ThemeProvider enableSystem={true} attribute='class'>
         {children}

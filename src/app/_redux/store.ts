@@ -1,10 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import refIDReducer from './refIDSlice'
+import refIDReducer from './Reducers/refIDSlice'
+import DialogReducer from './Reducers/dialogSlice'
+import DecisionReducer from './Reducers/decisionSlice'
+import TypingTestReducer from './Reducers/typingTestSlice'
+import CurrentModeReducer from './Reducers/gameModeSlice'
+
 
 export const store = configureStore({
   reducer: {
     refID: refIDReducer,
+    dialog: DialogReducer,
+    decision: DecisionReducer,
+    typingTest: TypingTestReducer,
+    currentMode: CurrentModeReducer,
   },
 })
 

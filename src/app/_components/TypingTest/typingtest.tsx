@@ -18,11 +18,14 @@ import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setRefID } from '../../_redux/refIDSlice'
+import { setRefID } from '../../_redux/Reducers/refIDSlice'
 import { RootState } from '../../_redux/store'
+import { setTypingTestObject } from '@/app/_redux/Reducers/typingTestSlice'
 
 const TypingTest = () => {
   const refID = useSelector((state: RootState) => state.refID.value)
+  // const {_id, challenge, timer, text, prompt, maxpoints, NextDialogRefID} = useSelector((state: RootState) => state.typingTest)
+  const dispatch = useDispatch()
   const backendURL = 'https://storyboard-backend.vercel.app'
   const [prompt, setPrompt] = useState('')
   const [untypedWords, setUntypedWords] = useState([''])
@@ -34,20 +37,29 @@ const TypingTest = () => {
   const [completed, setCompleted] = useState(false)
   const [wpm, setWpm] = useState(0)
   const [startText, setStartText] = useState('Start Game')
+  const  [NextDialogRefID, setNextDialogRefID]= useState('')
+
+
+useEffect(() => {
+  console.log(completed, NextDialogRefID)
+  if(completed){
+  dispatch(setRefID(NextDialogRefID))
+  }
+}, [completed])
+
   useEffect(() => {
-    window.scrollTo({
-      top: 1000, // Change this value to control the scroll distance
-      behavior: 'smooth', // This adds smooth scrolling animation
-    })
     GetPrompt(refID)
   }, [])
+
   /* Get the prompt of what we want the user to type here from MongoDB here */
   const GetPrompt = async (prompt: string) => {
     try {
       const data = await (await fetch(backendURL + '/typingtest/' + prompt)).json()
+      dispatch(setTypingTestObject(data))
       setStartText(data.text)
       setPrompt(data.prompt)
       setUntypedWords(data.prompt.split(' '))
+      setNextDialogRefID(data.NextDialogRefID)
       setCompletedWords([])
     } catch (e) {
       console.log(e)
@@ -95,7 +107,7 @@ const TypingTest = () => {
   // This useEffect will calculate the WPM every second
   useEffect(() => {
     const interval = setInterval(() => {
-      started && !completed && timer > 0 ? calculateWPM() : setCompleted(true)
+      started && !completed && timer > 0 ? calculateWPM() : null
     }, 1000)
     return () => clearInterval(interval)
   }, [started, completed, timeElapsed])
@@ -157,7 +169,7 @@ const TypingTest = () => {
                       <span
                         key={w_idx + 'anchor'}
                         className={`
-                                ${highlight && 'text-green-600'} 
+                                ${highlight && 'text-green-600'}
                                 ${currentWord && 'underline'}`}
                       >
                         {word.split('').map((letter, l_idx) => {
