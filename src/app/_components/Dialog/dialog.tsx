@@ -8,30 +8,78 @@ Preconditions: N/A
 Postconditions: Dialog page is rendered
 */
 
-import React from 'react'
-import Typewriter from "./Typewriter";
+import React, { useEffect } from 'react'
+
+import { setRefID } from '@/app/_redux/Reducers/refIDSlice'
+import { RootState } from '@/app/_redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+
+// import Typewriter from './Typewriter'
+import { setDialogObject } from '@/app/_redux/Reducers/dialogSlice'
+
 const Dialog = () => {
+  const backendURL = 'https://storyboard-backend.vercel.app'
+
+  const refID = useSelector((state: RootState) => state.refID.value)
+  const {Characters, Text, Speaker, BackgroundImage, NextDecisionRefID, NextDialogRefID} = useSelector((state: RootState) => state.dialog)
+  const dispatch = useDispatch()
+
+  /* Get the prompt of what we want the user to type here from MongoDB here */
+  const GetDialog = async (dialogID: string) => {
+    try {
+      const dialogObject = await (await fetch(backendURL + '/dialog/' + dialogID)).json()
+      dispatch(setDialogObject(dialogObject))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    GetDialog(refID)
+  }, [])
+
+  const characterbrightness = (Character: string) => {
+    return (Character === Speaker) ? 100 : 50
+  }
+
   return (
-    <div>
-    <div className='flex flex-col -z-50 min-h-screen' style={{ 
-      backgroundImage: "url(/cafe.png)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
-      {/* <h1 className='m-auto text-8xl'>Dialog</h1> */}
-      <div className='flex flex-row justify-between'>
-          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="person 1"></img>
-          <img className="h-auto max-w-sm rounded-lg shadow-xl dark:shadow-gray-800" src="/barista.png" alt="person 2"></img>
+    <>
+      <div
+        className='-z-50 flex min-h-screen w-full flex-col'
+        style={{
+          backgroundImage: BackgroundImage ? `url(/${BackgroundImage}.png)` : `none`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+
+      <div
+        className='fixed bottom-40 left-1/2 flex w-3/4  -translate-x-1/2 transform content-center items-center justify-center'
+        onClick={() => NextDecisionRefID ? dispatch(setRefID(NextDecisionRefID)) : GetDialog(NextDialogRefID)}
+        role='button'
+      >
+        {Characters?.Position1 &&  <img className={`h-auto w-1/5 rounded-lg shadow-xl brightness-${characterbrightness(Characters?.Position1)}`} src={`/${Characters?.Position1}.png`} alt='person 1' />}
+        {Characters?.Position2 &&  <img className={`h-auto w-1/5 rounded-lg shadow-xl brightness-${characterbrightness(Characters?.Position2)}`} src={`/${Characters?.Position2}.png`} alt='person 1' />}
+        <div className='w-1/5' />
+        {Characters?.Position3 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl brightness-${characterbrightness(Characters?.Position3)}`} src={`/${Characters?.Position3}.png`} alt='person 1' />}
+        {Characters?.Position4 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl brightness-${characterbrightness(Characters?.Position4)}`} src={`/${Characters?.Position4}.png`} alt='person 1' />}
+        {/* The dialog text */}
+        <div className='fixed -bottom-32 z-50 w-full'>
+          <div className='rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800'>
+            <h5 className='mb-2 text-2xl font-bold text-gray-900 dark:text-white'>{Speaker}</h5>
+            {/* <Typewriter
+              className='flex font-normal text-gray-700 dark:text-gray-400'
+              text={Text}
+              delay={20}
+            ></Typewriter> */}
+            <div className='flex font-normal text-gray-700 dark:text-gray-400'>{Text}</div>
+          </div>
+        </div>
       </div>
-      {/* The dialog text */}
-      <div className='fixed bottom-0 left-20 z-50 my-10 mx-40 w-8/12'>
-        <div className=" m-auto block p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Person's Name</h5>
-        <div className="font-normal text-gray-700 dark:text-gray-400">
-          <Typewriter text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce urna magna, congue quis metus quis, dapibus rutrum lorem. Proin accumsan ex nisi, imperdiet mattis metus hendrerit vitae. Phasellus porttitor hendrerit eros, a varius lacus sollicitudin eu. In mi nulla, suscipit et nunc vitae, sagittis pulvinar nisl. Sed convallis egestas ligula, vitae elementum tellus pharetra non. Curabitur ac ultrices nisi, sit amet sodales mauris. In fringilla arcu in aliquet luctus" delay={50}></Typewriter>
-        </div>
-        </div>
-      </div>   
-    </div>
-    </div>
+    </>
   )
 }
+
 
 export default Dialog

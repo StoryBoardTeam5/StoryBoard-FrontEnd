@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <header id='header'>
-      <div className='h-16 p-4 mx-auto flex max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
+      <div className='fixed bg-colors-background-50 dark:bg-colors-background-950 left-1/2 rounded-b-xl -translate-x-1/2 transform top-0 w-full z-10 ease-in duration-300 h-16 p-4 mx-auto flex max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
         <Link className='z-10 block text-colors-primary-800 dark:text-colors-primary-200' href='/'>
           <div className='ml-4 text-4xl'>
           <AiOutlineHome />
