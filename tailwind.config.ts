@@ -1,33 +1,44 @@
-/*
-File name     : tailwind.config.ts
-Description   : Tailwind configuration file. Used for styling the app.
-LastEditBy    : Andres Lopez-Bormann
-CreatedDate   : 2023-09-22
-Revisions  :
-  2023-11-03 - Add Comments
-  2023-11-05 - Adding Color palette
-Preconditions: N/A
-Postconditions: Configures the tailwindcss plugin.
-*/
+import type { Config } from "tailwindcss"
+import ColorPalette from "./src/app/_assets/colorpalette"
 
-import ColorPalette from './src/app/_assets/colorpalette'
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+const config = {
+  darkMode: ["class"],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
-  darkMode: 'class',
+  prefix: "",
   theme: {
-    extend: {
-      colors: ColorPalette,
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
-    height: {
-      "screen-with-nav": "calc(90vh - 4rem)",
+    extend: {
+      colors: {
+        ...ColorPalette
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config
+
 export default config
