@@ -29,14 +29,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={inter.className /* For font selection */}>
-        <ClientProviders>
+        <body className={inter.className /* For font selection */}>
+        <ClientProviders >
           <div className='min-h-screen bg-colors-background-50 text-colors-text-900 dark:bg-colors-background-950 dark:text-colors-text-100'>
             <Navbar />
             {children /* All pages on website are rendered here */}
           </div>
-        </ClientProviders>
-      </body>
+          </ClientProviders>
+        </body>
     </html>
   )
 }
