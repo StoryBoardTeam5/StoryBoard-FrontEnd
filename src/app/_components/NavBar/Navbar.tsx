@@ -15,35 +15,28 @@ Postconditions:
 
 import React from 'react'
 
-import { useSession } from 'next-auth/react'
-import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import { useTheme } from 'next-themes'
 import { AiOutlineHome } from 'react-icons/ai'
 import { FaMoon, FaSun } from 'react-icons/fa'
-
 const Navbar = () => {
-  const { data: session, status } = useSession()
-  const loggedIn = status === 'authenticated'
-  const userName = session?.user?.name ?? ''
-
-  const { theme, setTheme } = useTheme()
+  const {theme, setTheme} = useTheme()
   const handleMenu = () => {
     console.log('menu clicked')
   }
 
   const handleThemeChange = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(theme==='dark' ? 'light' : 'dark')
     console.log(`Theme changed to ${theme}`)
   }
 
   return (
     <header id='header'>
-      <div className='h-16 mx-auto flex max-w-screen-xl items-center gap-8 p-4 px-4 sm:px-6 lg:px-8'>
+      <div className='h-16 p-4 mx-auto flex max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
         <Link className='z-10 block text-colors-primary-800 dark:text-colors-primary-200' href='/'>
           <div className='ml-4 text-4xl'>
-            <AiOutlineHome />
-          </div>
-        </Link>
+          <AiOutlineHome />
+            </div>        </Link>
 
         <div className='z-10 flex flex-1 items-center justify-end md:justify-between'>
           <nav aria-label='Global' className='hidden md:block'>
@@ -61,28 +54,27 @@ const Navbar = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-            <div> {userName} </div>
             <div className='sm:flex sm:gap-6'>
               <Link
                 className='rounded-md bg-colors-secondary-200 px-5 py-2.5 text-sm font-medium transition hover:bg-colors-secondary-300 dark:bg-colors-secondary-800 dark:hover:bg-colors-secondary-700'
-                href={'/api/auth/' + (loggedIn ? 'signout' : 'signin')}
+                href='/login'
               >
-                {loggedIn ? 'Sign Out' : 'Sign In / Register'}
+                Login
               </Link>
 
-              {/* <Link
+              <Link
                 className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-sm font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
                 href='/register'
               >
                 Register
-              </Link> */}
+              </Link>
               <button
-                className='text-md rounded-md bg-colors-primary-800 px-5 py-2.5 font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
+                className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-md font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
                 onClick={handleThemeChange}
               >
-                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+                {theme==='dark' ? <FaSun/> : <FaMoon/>}
               </button>
-            </div>
+              </div>
 
             <button
               onClick={handleMenu}
