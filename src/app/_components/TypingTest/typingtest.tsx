@@ -128,7 +128,7 @@ useEffect(() => {
         style={{
           backgroundImage: 'url(/cafe.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
         }}>
-    <div id='body' className='flex h-screen-with-nav content-center items-center justify-center'>
+    <div id='body' className='flex min-h-screen flex-col content-center items-center justify-center'>
 
       <div
         id='Wrapper'

@@ -14,28 +14,35 @@ Postconditions:
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+
+import { Logout } from '@/actions/logout'
+import { LoginButton } from '@/components/auth/login-button'
+import { Button } from '@/components/ui/button'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
 import { AiOutlineHome } from 'react-icons/ai'
 import { FaMoon, FaSun } from 'react-icons/fa'
+
 const Navbar = () => {
-  const {theme, setTheme} = useTheme()
-  const handleMenu = () => {
-    console.log('menu clicked')
+  const { theme, setTheme } = useTheme()
+  const user = useCurrentUser()
+  const handleLogout = async () => {
+    await Logout()
   }
 
   const handleThemeChange = () => {
-    setTheme(theme==='dark' ? 'light' : 'dark')
-    console.log(`Theme changed to ${theme}`)
+    setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
   return (
     <header id='header'>
-      <div className='fixed bg-colors-background-50 dark:bg-colors-background-950 left-1/2 rounded-b-xl -translate-x-1/2 transform top-0 w-full z-10 ease-in duration-300 h-16 p-4 mx-auto flex max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8'>
-        <Link className='z-10 block text-colors-primary-800 dark:text-colors-primary-200' href='/'>
+      <div className='fixed left-1/2 top-0 z-10 mx-auto flex h-16 w-full max-w-screen-xl -translate-x-1/2 transform items-center gap-8 rounded-b-xl bg-muted p-4 px-4 duration-300 ease-in sm:px-6 lg:px-8'>
+        <Link className='z-10 block text-primary' href='/'>
           <div className='ml-4 text-4xl'>
-          <AiOutlineHome />
-            </div>        </Link>
+            <AiOutlineHome />
+          </div>
+        </Link>
 
         <div className='z-10 flex flex-1 items-center justify-end md:justify-between'>
           <nav aria-label='Global' className='hidden md:block'>
@@ -53,50 +60,27 @@ const Navbar = () => {
           </nav>
 
           <div className='flex items-center gap-4'>
-            <div className='sm:flex sm:gap-6'>
-              <Link
-                className='rounded-md bg-colors-secondary-200 px-5 py-2.5 text-sm font-medium transition hover:bg-colors-secondary-300 dark:bg-colors-secondary-800 dark:hover:bg-colors-secondary-700'
-                href='/login'
-              >
-                Login
-              </Link>
+            <div className='flex sm:gap-6'>
+              {user ? (
+                <form action={handleLogout}>
+                  <Button type='submit' variant='default'>
+                    Sign out
+                  </Button>
+                </form>
+              ) : (
+                <LoginButton>
+                  <Button variant='default'>Sign In</Button>
+                </LoginButton>
+              )}
 
-              <Link
-                className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-sm font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
-                href='/register'
-              >
-                Register
-              </Link>
-              <Link
-                className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-sm font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
-                href='/ClickToPlay'
-              >
-                New Game
-              </Link>
-              <button
-                className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-md font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
-                onClick={handleThemeChange}
-              >
-                {theme==='dark' ? <FaSun/> : <FaMoon/>}
-              </button>
-              </div>
+              <Button variant='default'>
+                <Link href='/ClickToPlay'>New Game</Link>{' '}
+              </Button>
 
-            <button
-              onClick={handleMenu}
-              className='block rounded bg-colors-accent-600 p-2.5 text-colors-text-200 transition hover:text-colors-text-400 dark:bg-colors-accent-400 dark:text-colors-text-800 dark:hover:text-colors-text-100 md:hidden'
-            >
-              <span className='sr-only'>Toggle menu</span>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-5 w-5'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth='2'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='M4 6h16M4 12h16M4 18h16' />
-              </svg>
-            </button>
+              <Button onClick={handleThemeChange} variant='default'>
+                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
