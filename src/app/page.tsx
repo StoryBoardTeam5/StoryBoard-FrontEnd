@@ -12,26 +12,41 @@ Postconditions:
 
 import React from 'react'
 
+import { LoginButton } from '@/components/auth/login-button'
+import { Button } from '@/components/ui/button'
+import { currentUser } from '@/lib/auth'
+import { cn } from '@/lib/utils'
+import { Poppins } from 'next/font/google'
 import Link from 'next/link'
 
-const page = () => {
+const font = Poppins({
+  subsets: ['latin'],
+  weight: ['600'],
+})
+
+const page = async () => {
+  const user = await currentUser()
   return (
-    <section className='flex h-screen-with-nav'>
-      <div className='m-auto'>
-        <h1 className='bg-gradient-to-r from-colors-primary-300 via-colors-secondary-600 to-colors-accent-900 bg-clip-text pb-1 text-3xl font-extrabold text-transparent sm:text-5xl'>
-          Welcome to StoryBoard
-          {/* <span className="sm:block"> Choose your story</span> */}
-        </h1>
-        <div className='mt-8 flex justify-center gap-4'>
-          <Link
-            className='rounded border border-colors-primary-600 bg-colors-primary-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-colors-primary-600 sm:w-auto'
-            href='/play'
-          >
-            Play Now
-          </Link>
+    <main className='flex h-full flex-col items-center justify-center'>
+      <div className='space-y-6 text-center'>
+        <h1 className={cn('text-6xl font-semibold text-primary ', font.className)}>Welcome to StoryBoard</h1>
+        <div className='flex justify-evenly'>
+          {!user ? (
+            <LoginButton>
+              <Button size='lg' variant='default'>
+                Sign In to Play
+              </Button>
+            </LoginButton>
+          ) : (
+            <Link href={'/play'}>
+              <Button size='lg' variant={'outline'}>
+                Play Now
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
-    </section>
+    </main>
   )
 }
 
