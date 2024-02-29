@@ -69,7 +69,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className='rounded-md bg-colors-primary-800 px-5 py-2.5 text-sm font-medium text-colors-text-100 transition hover:text-colors-secondary-400 dark:bg-colors-primary-200 dark:text-colors-secondary-800 dark:hover:text-colors-secondary-600'
-                href='/ClickToPlay'
+                href='/MyGames'
               >
                 New Game
               </Link>
