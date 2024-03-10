@@ -57,7 +57,7 @@ const Decision = () => {
             'Loading...'
           ) : (
             <div>
-              <p className='pt-12 font-normal text-gray-700 dark:text-gray-200'>{Question}</p>
+              <p className='pt-12 font-normal text-gray-700 dark:text-gray-200 text-center text-lg'>{Question}</p>
               <h5 className='m-auto pt-12 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
                 What do you choose?
               </h5>

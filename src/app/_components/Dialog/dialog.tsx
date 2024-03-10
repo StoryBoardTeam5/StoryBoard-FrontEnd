@@ -14,7 +14,6 @@ import { setRefID } from '@/app/_redux/Reducers/refIDSlice'
 import { RootState } from '@/app/_redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Typewriter from './Typewriter'
 import { setDialogObject } from '@/app/_redux/Reducers/dialogSlice'
 
 const Dialog = () => {
@@ -68,12 +67,8 @@ const Dialog = () => {
         <div className='fixed -bottom-32 z-50 w-full'>
           <div className='rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800'>
             <h5 className='mb-2 text-2xl font-bold text-gray-900 dark:text-white'>{Speaker}</h5>
-            {/* <Typewriter
-              className='flex font-normal text-gray-700 dark:text-gray-400'
-              text={Text}
-              delay={20}
-            ></Typewriter> */}
-            <div className='flex font-normal text-gray-700 dark:text-gray-400'>{Text}</div>
+            <div className='flex font-normal text-gray-700 dark:text-gray-400'>{Text}
+            </div>
           </div>
         </div>
       </div>
