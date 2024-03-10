@@ -123,8 +123,6 @@ useEffect(() => {
   }
 
   const timer = Math.ceil(timerPrompt - timeElapsed)
-  console.log("Prompt", timerPrompt)
-  console.log(timer)
   return (
     <div
     className='-z-50 min-h-screen'
