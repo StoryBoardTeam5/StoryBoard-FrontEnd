@@ -38,6 +38,7 @@ const TypingTest = () => {
   const [wpm, setWpm] = useState(0)
   const [startText, setStartText] = useState('Start Game')
   const  [NextDialogRefID, setNextDialogRefID]= useState('')
+  const [timerPrompt, setTimer] = useState(0)
 
 
 useEffect(() => {
@@ -61,6 +62,7 @@ useEffect(() => {
       setUntypedWords(data.prompt.split(' '))
       setNextDialogRefID(data.NextDialogRefID)
       setCompletedWords([])
+      setTimer(data.timer)
     } catch (e) {
       console.log(e)
       setPrompt('Error getting prompt')
@@ -120,8 +122,9 @@ useEffect(() => {
     setWpm(wpm)
   }
 
-  const timer = Math.ceil(60 - timeElapsed)
-
+  const timer = Math.ceil(timerPrompt - timeElapsed)
+  console.log("Prompt", timerPrompt)
+  console.log(timer)
   return (
     <div
     className='-z-50 min-h-screen'

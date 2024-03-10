@@ -55,6 +55,10 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      brightness: {
+        25: '.25',
+        100: '1.00',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
