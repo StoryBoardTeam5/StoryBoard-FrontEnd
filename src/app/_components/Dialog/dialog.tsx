@@ -14,7 +14,6 @@ import { setRefID } from '@/app/_redux/Reducers/refIDSlice'
 import { RootState } from '@/app/_redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 
-// import Typewriter from './Typewriter'
 import { setDialogObject } from '@/app/_redux/Reducers/dialogSlice'
 
 const Dialog = () => {
@@ -39,7 +38,7 @@ const Dialog = () => {
   }, [])
 
   const characterbrightness = (Character: string) => {
-    return (Character === Speaker) ? 100 : 50
+    return (Character === Speaker) ? 'brightness-100' : 'brightness-25'
   }
 
   return (
@@ -59,21 +58,17 @@ const Dialog = () => {
         onClick={() => NextDecisionRefID ? dispatch(setRefID(NextDecisionRefID)) : GetDialog(NextDialogRefID)}
         role='button'
       >
-        {Characters?.Position1 &&  <img className={`h-auto w-1/5 rounded-lg shadow-xl brightness-${characterbrightness(Characters?.Position1)}`} src={`/${Characters?.Position1}.png`} alt='person 1' />}
-        {Characters?.Position2 &&  <img className={`h-auto w-1/5 rounded-lg shadow-xl brightness-${characterbrightness(Characters?.Position2)}`} src={`/${Characters?.Position2}.png`} alt='person 1' />}
+        {Characters?.Position1 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl ${characterbrightness(Characters?.Position1)}`} src={`/${Characters?.Position1}.png`} alt='person 1' />}
+        {Characters?.Position2 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl ${characterbrightness(Characters?.Position2)}`} src={`/${Characters?.Position2}.png`} alt='person 2' />}
         <div className='w-1/5' />
-        {Characters?.Position3 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl brightness-${characterbrightness(Characters?.Position3)}`} src={`/${Characters?.Position3}.png`} alt='person 1' />}
-        {Characters?.Position4 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl brightness-${characterbrightness(Characters?.Position4)}`} src={`/${Characters?.Position4}.png`} alt='person 1' />}
+        {Characters?.Position3 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl ${characterbrightness(Characters?.Position3)}`} src={`/${Characters?.Position3}.png`} alt='person 3' />}
+        {Characters?.Position4 &&  <img className={`h-auto w-1/5 rounded-lg -scale-x-100 shadow-xl ${characterbrightness(Characters?.Position4)}`} src={`/${Characters?.Position4}.png`} alt='person 4' />}
         {/* The dialog text */}
         <div className='fixed -bottom-32 z-50 w-full'>
           <div className='rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800'>
             <h5 className='mb-2 text-2xl font-bold text-gray-900 dark:text-white'>{Speaker}</h5>
-            {/* <Typewriter
-              className='flex font-normal text-gray-700 dark:text-gray-400'
-              text={Text}
-              delay={20}
-            ></Typewriter> */}
-            <div className='flex font-normal text-gray-700 dark:text-gray-400'>{Text}</div>
+            <div className='flex font-normal text-gray-700 dark:text-gray-400'>{Text}
+            </div>
           </div>
         </div>
       </div>

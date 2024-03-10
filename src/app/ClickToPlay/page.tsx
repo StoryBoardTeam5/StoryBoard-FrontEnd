@@ -27,11 +27,9 @@ import Play from '../play/page';
 
 const ClickToPlay = () => {
   // Generate random image URLs
-  const getRandomImageUrl = () => {
-    const randomImageWidth = Math.floor(Math.random() * 800) + 400; // Random width between 400 and 1200
-    const randomImageHeight = Math.floor(Math.random() * 800) + 400; // Random height between 400 and 1200
-    return `https://via.placeholder.com/${randomImageWidth}x${randomImageHeight}`;
-  };
+const getRandomImageUrl = (n: number) => {
+  return `Game${n}.png`;
+};
 
   const handleClick = (event: any) => {
     // 👇️ refers to the image element
@@ -42,7 +40,7 @@ const ClickToPlay = () => {
     <div className='min-h-screen flex content-center items-center justify-center'>
     <Carousel className="lg:max-w-screen lg:max-h-screen m-32">
       <CarouselContent className='m-12'>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <CarouselItem key={index} className='place-items-center'>
             <div className="flex p-1 justify-center">
               <Card className='w-3/4'>
@@ -52,7 +50,7 @@ const ClickToPlay = () => {
                   </div>
                   <div className='flex place-items-center justify-center object-cover aspect-[4/3]'>
                   <img
-                    src={getRandomImageUrl()}
+                    src={getRandomImageUrl(index + 1)}
                     alt={`Random Image ${index + 1}`}
                     className="w-3/4 h-3/4 object-cover"
                     onClick={handleClick}
