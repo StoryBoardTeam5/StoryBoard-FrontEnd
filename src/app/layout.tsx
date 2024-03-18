@@ -16,7 +16,7 @@ import { Inter } from 'next/font/google'
 
 import './globals.css'
 
-import Navbar from './_components/NavBar/Navbar'
+import Navbar from '../components/NavBar/Navbar'
 import { ClientProviders } from './_utils/ClientProviders'
 
 const inter = Inter({ subsets: ['latin'] }) // For font selection throughout website

@@ -13,6 +13,7 @@ export interface DialogState {
   BackgroundImage: string
   NextDialogRefID: string
   NextDecisionRefID: string
+  Mode: string
 }
 
 const initialState: DialogState = {
@@ -28,6 +29,7 @@ const initialState: DialogState = {
   BackgroundImage: '',
   NextDialogRefID: '',
   NextDecisionRefID: '',
+  Mode: 'Dialog',
 }
 
 export const DialogSlice = createSlice({

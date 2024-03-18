@@ -11,27 +11,20 @@ Postconditions: Game Navigation is rendered and user can switch between modes
 */
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import TypingTest from '@/components/TypingTest/PreTestMenu'
+import { useSelector } from 'react-redux'
 
-import Decision from '../_components/Decision/decision'
-import Dialog from '../_components/Dialog/dialog'
-import TypingTest from '../_components/TypingTest/typingtest'
 import type { RootState } from '../_redux/store'
-import { nextMode } from '../_redux/Reducers/gameModeSlice'
+import Decision from '../../components/Decision/decision'
+import Dialog from '../../components/Dialog/dialog'
 
 const Play = () => {
-  const refID = useSelector((state: RootState) => state.refID.value)
   const currentMode = useSelector((state: RootState) => state.currentMode.value)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(nextMode())
-  }, [refID])
 
   return (
-    <div>
+    <>
       {currentMode === 'Dialog' ? (
         <Dialog />
       ) : currentMode === 'Decision' ? (
@@ -39,7 +32,7 @@ const Play = () => {
       ) : currentMode === 'TypingTest' ? (
         <TypingTest />
       ) : null}
-    </div>
+    </>
   )
 }
 export default Play

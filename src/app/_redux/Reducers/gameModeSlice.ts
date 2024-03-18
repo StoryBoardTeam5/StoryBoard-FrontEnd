@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export interface CurrentModeState {
   value: string
 }
 
 const initialState: CurrentModeState = {
-  value: '',
+  value: 'Dialog',
 }
 
 export const CurrentModeSlice = createSlice({
   name: 'Current Mode',
   initialState,
   reducers: {
-    nextMode: (state) => {
-      state.value = state.value === 'Dialog' ? 'Decision' : state.value === 'Decision' ? 'TypingTest' : 'Dialog'
+    setCurrentMode: (state, action: PayloadAction<string>) => {
+      state.value = action.payload
     },
   },
 })
 
-export const { nextMode } = CurrentModeSlice.actions
+export const { setCurrentMode } = CurrentModeSlice.actions
 
 export default CurrentModeSlice.reducer

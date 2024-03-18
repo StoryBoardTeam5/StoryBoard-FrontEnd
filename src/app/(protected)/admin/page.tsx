@@ -1,15 +1,11 @@
-'use client'
-
-import React from 'react'
-
-import GateKeeper from '@/components/auth/gatekeeper'
 import { FormSuccess } from '@/components/form-success'
+import React from 'react'
 
 const AdminPage = () => {
   return (
-    <GateKeeper allowedRole='ADMIN'>
-      <FormSuccess message='You are an admin!' />
-    </GateKeeper>
+    <div>
+      <FormSuccess message='You Have Been Promoted! You Are Now One of My Elite Employees!'/>
+    </div>
   )
 }
 
