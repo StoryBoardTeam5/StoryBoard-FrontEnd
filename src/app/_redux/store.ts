@@ -5,7 +5,7 @@ import DialogReducer from './Reducers/dialogSlice'
 import DecisionReducer from './Reducers/decisionSlice'
 import TypingTestReducer from './Reducers/typingTestSlice'
 import CurrentModeReducer from './Reducers/gameModeSlice'
-
+import BackgroundImageReducer from './Reducers/BackgroundImageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +14,7 @@ export const store = configureStore({
     decision: DecisionReducer,
     typingTest: TypingTestReducer,
     currentMode: CurrentModeReducer,
+    backgroundImage: BackgroundImageReducer,
   },
 })
 

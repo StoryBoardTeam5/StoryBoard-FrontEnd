@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setRefID } from '../../_redux/Reducers/refIDSlice'
 import { RootState } from '../../_redux/store'
 import { setTypingTestObject } from '@/app/_redux/Reducers/typingTestSlice'
+import { setCurrentMode } from '@/app/_redux/Reducers/gameModeSlice'
 
 const TypingTest = () => {
   const refID = useSelector((state: RootState) => state.refID.value)
@@ -45,7 +46,8 @@ useEffect(() => {
   console.log(completed, NextDialogRefID)
   if(completed){
   dispatch(setRefID(NextDialogRefID))
-  }
+  dispatch(setCurrentMode('Dialog'))
+}
 }, [completed])
 
   useEffect(() => {
@@ -125,10 +127,7 @@ useEffect(() => {
   const timer = Math.ceil(timerPrompt - timeElapsed)
   return (
     <div
-    className='-z-50 min-h-screen'
-        style={{
-          backgroundImage: 'url(/cafe.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-        }}>
+    className='min-h-screen w-full'>
     <div id='body' className='flex min-h-screen flex-col content-center items-center justify-center'>
 
       <div

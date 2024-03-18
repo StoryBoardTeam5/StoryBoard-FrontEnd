@@ -13,6 +13,7 @@ export interface DialogState {
   BackgroundImage: string
   NextDialogRefID: string
   NextDecisionRefID: string
+  Mode: string
 }
 
 const initialState: DialogState = {
