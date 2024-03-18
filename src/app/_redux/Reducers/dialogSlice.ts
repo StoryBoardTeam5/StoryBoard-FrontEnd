@@ -29,6 +29,7 @@ const initialState: DialogState = {
   BackgroundImage: '',
   NextDialogRefID: '',
   NextDecisionRefID: '',
+  Mode: 'Dialog',
 }
 
 export const DialogSlice = createSlice({
