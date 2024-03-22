@@ -12,7 +12,6 @@ export const getUserById = async (_id?: string) => {
 }
 
 export const linkAccount = async (id?: string) => {
-  console.log('id: ', id)
   const user = await User.findOneAndUpdate(
     { _id: id },
     {
