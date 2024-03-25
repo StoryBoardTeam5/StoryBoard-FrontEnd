@@ -74,7 +74,7 @@ const useEngine = () => {
   const sumErrors = useCallback(() => {
     const wordsReached = words.substring(0, Math.min(cursor, words.length))
     setWordsPerMinute(wpm(timer, wordsReached))
-    setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached))
+    setErrors(countErrors(typed, wordsReached))
   }, [typed, words, cursor])
 
   // as soon the user starts typing the first letter, we start
