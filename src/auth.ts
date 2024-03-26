@@ -1,15 +1,14 @@
 import authConfig from '@/auth.config'
+import { getAccountByUserId } from '@/data/account'
 import { getUserById, linkAccount } from '@/data/user'
 import clientPromise from '@/lib/db'
+import { LoginSchema } from '@/schemas'
 import { MongoDBAdapter } from '@auth/mongodb-adapter'
 import bcrypt from 'bcryptjs'
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import Github from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
-
-import { getAccountByUserId } from '@/data/account'
-import { LoginSchema } from '@/schemas'
 
 declare module 'next-auth' {
   interface User {
@@ -26,17 +25,19 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, trigger }) {
       if (!token.sub) return token
-      const existingUser = await getUserById(token.sub)
-      if (!existingUser) return token
-      const existingAccount = await getAccountByUserId(existingUser.id)
+      if (trigger === 'signIn' || trigger === 'signUp') {
+        const existingUser = await getUserById(token.sub)
+        if (!existingUser) return token
+        const existingAccount = await getAccountByUserId(existingUser.id)
 
-      token.isOAuth = !!existingAccount
-      token.role = existingUser.role
-      token.name = existingUser.name
-      token.email = existingUser.email
-      token.role = existingUser.role
+        token.isOAuth = !!existingAccount
+        token.role = existingUser.role
+        token.name = existingUser.name
+        token.email = existingUser.email
+        token.role = existingUser.role
+      }
       return token
     },
     async session({ session, token }) {
