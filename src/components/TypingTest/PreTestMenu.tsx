@@ -24,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import PreTest from './PreTest'
 import TypingTest from './Test'
-import PostTest from './PostTest'
 
 const PreTestMenu = () => {
   const backendURL = 'https://storyboard-backend.vercel.app'
@@ -33,7 +32,6 @@ const PreTestMenu = () => {
   const { challenge, timer, text, maxpoints, NextDialogRefID } = useSelector((state: RootState) => state.typingTest)
   const dispatch = useDispatch()
   const [typingTestStarted, setTypingTestStarted] = useState(false)
-  const [typingTestFinished, setTypingTestFinished] = useState(false)
   /* Called When Typing Test Component is first Rendered, will get the Typing Test object from the backend */
   useEffect(() => {
     GetTypingTest(refID)
@@ -69,11 +67,9 @@ const PreTestMenu = () => {
 
   return (
     <div className='flex min-h-screen w-full flex-col items-center justify-center'>
-      <div className='max-w-[50%] flex-col rounded-lg bg-accent p-8'>
-        {typingTestFinished ? (
-          <PostTest SwitchGameModeToDialog={SwitchGameModeToDialog} NextDialogRefID={NextDialogRefID} setTypingTestFinished={setTypingTestFinished}/>
-        ) : typingTestStarted ? (
-          <TypingTest setTypingTestFinished={setTypingTestFinished} />
+      <div className='flex-col rounded-lg bg-accent p-8'>
+        {typingTestStarted ? (
+          <TypingTest SwitchGameModeToDialog={SwitchGameModeToDialog} NextDialogRefID={NextDialogRefID} />
         ) : (
           <PreTest
             challengeText={challengeText}
