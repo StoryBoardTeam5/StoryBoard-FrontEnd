@@ -22,3 +22,14 @@ export const linkAccount = async (id?: string) => {
   )
   return user
 }
+
+export const saveProgress = async (id?: string, progress?: string) => {
+  await User.findOneAndUpdate(
+    { _id: id},
+    {
+      $set: {
+        storyProgress: progress,
+      },
+    },
+  )
+}

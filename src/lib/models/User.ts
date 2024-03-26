@@ -12,6 +12,7 @@ const userSchema = new Schema(
     password: String,
     role: String,
     emailVerified: Date,
+    storyProgress: String,
   },
   { timestamps: true },
 )

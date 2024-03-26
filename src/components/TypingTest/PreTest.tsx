@@ -6,6 +6,7 @@ import { FormError } from '../form-error'
 // import { FormError } from '../form-error'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
+import { SaveUserProgress } from '../../actions/SaveUserProgress'
 
 interface PreTestProps {
   challengeText: string
@@ -28,6 +29,11 @@ const PreTest = ({
   setTypingTestStarted,
   SwitchGameModeToDialog,
 }: PreTestProps) => {
+  const handleSkip = () => {
+    SaveUserProgress(NextDialogRefID)
+    SwitchGameModeToDialog(NextDialogRefID)
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -55,7 +61,7 @@ const PreTest = ({
           <Button size={'xl'} onClick={() => setTypingTestStarted(true)}>
             Start Typing Test!
           </Button>
-          <Button size={'xl'} onClick={() => SwitchGameModeToDialog(NextDialogRefID)}>
+          <Button size={'xl'} onClick={handleSkip}>
             Skip Typing Test!
           </Button>
         </div>
