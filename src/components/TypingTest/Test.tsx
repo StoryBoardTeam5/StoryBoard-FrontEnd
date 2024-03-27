@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import useEngine, { calculateAccuracyPercentage } from './hooks/useEngine'
 import Results from './Results'
 import UserTypings from './UserInput'
+import { SaveUserProgress } from '../../actions/SaveUserProgress'
 
 interface TypingTestProps {
   SwitchGameModeToDialog: (dialogID: string) => void
@@ -16,6 +17,7 @@ const TypingTest = ({ SwitchGameModeToDialog, NextDialogRefID }: TypingTestProps
 
   // Set the typing test to finished
   const handleTestFinished = () => {
+    SaveUserProgress(NextDialogRefID)
     SwitchGameModeToDialog(NextDialogRefID)
   }
 
