@@ -5,7 +5,7 @@ export interface RefIDState {
 }
 
 const initialState: RefIDState = {
-  value: '65d17e012e042de20128c4d4',
+  value: '000000000000000000000012',
 }
 
 export const refIDSlice = createSlice({
