@@ -21,7 +21,7 @@ const Dialog = () => {
   const backendURL = 'https://storyboard-backend.vercel.app'
 
   const refID = useSelector((state: RootState) => state.refID.value)
-  const { Characters, Text, Speaker, BackgroundImage, NextDecisionRefID, NextDialogRefID } = useSelector(
+  const { Characters, Text, Speaker, BackgroundImage, NextDecisionRefID, NextDialogRefID, Mode } = useSelector(
     (state: RootState) => state.dialog,
   )
   const dispatch = useDispatch()
@@ -30,6 +30,26 @@ const Dialog = () => {
   useEffect(() => {
     GetDialog(refID)
   }, [])
+
+  useEffect(() => {
+    // Function to handle key press
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (Mode === 'Dialog' && (event.key === ' ' || event.key === 'Spacebar')) {
+        // 'Spacebar' for IE11 compatibility
+        NextDecisionRefID ? SwitchGameModeToDecision(NextDecisionRefID) : GetDialog(NextDialogRefID)
+        // Prevent the default action to stop scrolling when space is pressed
+        event.preventDefault()
+      }
+    }
+
+    // Add event listener for keydown
+    window.addEventListener('keydown', handleKeyPress)
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [Mode, NextDecisionRefID, NextDialogRefID]) // Empty array ensures this effect runs only once on mount
 
   /* Get the prompt of what we want the user to type here from MongoDB here */
   const GetDialog = async (dialogID: string) => {
@@ -73,7 +93,6 @@ const Dialog = () => {
         onClick={() => (NextDecisionRefID ? SwitchGameModeToDecision(NextDecisionRefID) : GetDialog(NextDialogRefID))}
         role='button'
       >
-
         {/* The character images */}
         {Characters?.Position1 && renderCharacter(Characters?.Position1, false)}
         {Characters?.Position2 && renderCharacter(Characters?.Position2, false)}
