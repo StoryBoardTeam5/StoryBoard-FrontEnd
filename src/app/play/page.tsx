@@ -11,17 +11,28 @@ Postconditions: Game Navigation is rendered and user can switch between modes
 */
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import TypingTest from '@/components/TypingTest/PreTestMenu'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import type { RootState } from '../_redux/store'
 import Decision from '../../components/Decision/decision'
 import Dialog from '../../components/Dialog/dialog'
+import { setRefID } from '../_redux/Reducers/refIDSlice'
+import { GetUserProgress } from '@/actions/GetUserProgress'
 
 const Play = () => {
   const currentMode = useSelector((state: RootState) => state.currentMode.value)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    GetUserProgress().then((progress) => {
+      console.log('Progress:', progress)
+      dispatch(setRefID(progress))
+    })
+  }, [])
+
 
   return (
     <>
