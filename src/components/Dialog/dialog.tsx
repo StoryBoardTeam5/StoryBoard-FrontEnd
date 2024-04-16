@@ -29,7 +29,7 @@ const Dialog = () => {
   // Called When Dialog is first Rendered, will get the Dialog object from the backend
   useEffect(() => {
     GetDialog(refID)
-  }, [])
+  }, [refID])
 
   useEffect(() => {
     // Function to handle key press

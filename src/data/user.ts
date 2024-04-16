@@ -33,3 +33,12 @@ export const saveProgress = async (id?: string, progress?: string) => {
     },
   )
 }
+
+
+export const getProgress = async (id?: string) => {
+  const user = await User.findOne({
+    _id: id,
+  })
+  return user?.storyProgress
+}
+
